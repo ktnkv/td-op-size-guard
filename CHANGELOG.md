@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1
+
+### Added
+
+- A `readme` annotation and a `changelog` DAT inside the component. What the tool is, how to use it and its history now travel with the tox.
+
 ## 0.1.0
 
 ### Added
