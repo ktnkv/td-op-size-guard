@@ -5,7 +5,8 @@
 # `parent().par.Active`, and in perform mode its Monitor OPs list is empty.
 #
 # TouchDesigner calls these at the end of the frame in which the change
-# happened, once per operator.
+# happened, once per operator. An operator destroyed in that same frame (a
+# script that creates and destroys in one call) is reported as None.
 
 
 def onNumChildrenChange(changeOp):

@@ -63,3 +63,19 @@ def test_size_edit_does_nothing_while_the_guard_is_stopped(t):
     t.tool.par.Sizew = 222
     t.guard.OnSizeParChange()
     assert t.guard.sizes['CHOP'][0] != 222
+
+
+def test_operator_destroyed_in_the_same_frame_is_ignored(t):
+    # A script creates a network, adds an operator and destroys the network
+    # in one call. At the end of that frame TouchDesigner calls both OP
+    # Execute callbacks with None in place of the operator that is gone.
+    t.guard.shownIds = (t.root.id,)
+    t.guard.Watch([t.root])
+    gone = t.root.create(baseCOMP, 'gone')
+    gone.create(constantCHOP, 'child')
+    gone.destroy()
+    callbacks = t.tool.op('opExec').module
+    callbacks.onNumChildrenChange(None)
+    callbacks.onUIChange(None)
+    t.guard.OnChildrenChange(None)
+    t.guard.OnTileChange(None)

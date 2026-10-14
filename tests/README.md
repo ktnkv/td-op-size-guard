@@ -17,5 +17,5 @@ The tests do not move panes and do not switch perform mode. The OP Execute callb
 | File | Covers |
 | --- | --- |
 | `test_rule.py` | main size, family override, rounding, exempt operators, bottom-left corner, one network versus a tree |
-| `test_watch.py` | watcher patterns, stop, reactions to a new operator and a resized tile |
+| `test_watch.py` | watcher patterns, stop, reactions to a new operator and a resized tile, an operator destroyed in the frame it was reported in |
 | `test_page.py` | pages, parameter order, sections, gated sizes, About, wiring of the DATs, DAT text equals `src/` |

@@ -228,7 +228,15 @@ class SizeGuardExt:
     # Reactions to events
     # ======================================================================
     def OnChildrenChange(self, comp):
-        """An operator appeared in or left a watched network."""
+        """An operator appeared in or left a watched network.
+
+        comp is None when the network was destroyed in the same frame:
+        TouchDesigner reports the change at the end of the frame, after the
+        operator is gone. A script does that (create and destroy in one
+        call), a person in the network editor does not.
+        """
+        if comp is None:
+            return
         if comp.id in self.shownIds:
             self.FixChildren(comp)
 
@@ -237,7 +245,11 @@ class SizeGuardExt:
 
         Moving is reported too and costs one comparison here. After a fix the
         event comes once more, finds the right size and changes nothing.
+        o is None when the operator was destroyed in the same frame, as in
+        OnChildrenChange.
         """
+        if o is None:
+            return
         network = o.parent()
         if network is not None and network.id in self.shownIds:
             self.Fix(o)

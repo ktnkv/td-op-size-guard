@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2
+
+### Fixed
+
+- A script that creates an operator in an open network and destroys it in the same frame no longer makes the tool print an error at the end of that frame. TouchDesigner reports the destroyed operator as `None`, and the tool now ignores it.
+
 ## 0.1.1
 
 ### Added
